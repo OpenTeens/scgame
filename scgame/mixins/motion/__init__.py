@@ -18,6 +18,26 @@ class MotionMixin(BaseSprite):
         self.y += delta_y
         self.game.refresh()
 
+    def point_towards(self, target):
+        """
+        精灵朝向特定目标
+        :param target: 可以是具有x和y坐标的对象，或者是一个特定的角度（整数）
+        :return: None
+        """
+        if isinstance(target, int):
+            self.direction = target
+        else:
+            self.direction = math.degrees(math.atan2(target.y - self.y, target.x - self.x))
+            if self.direction < 0:
+                self.direction += 360
+    
+    def on_edge(self) -> bool:
+        """
+        检查精灵是否触碰到边界
+        :return: 如果精灵触碰到边界，返回True，否则返回False
+        """
+        return not(-240 <= self.x <= 240 and -180 <= self.y <= 180)
+      
     def turn(self, degrees):
         """
         旋转精灵

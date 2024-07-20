@@ -1,3 +1,5 @@
+import time
+
 import pygame
 from typing import Dict, List
 from typing import TYPE_CHECKING
@@ -14,13 +16,16 @@ class Game:
         self.global_lists: Dict[str, List] = dict()
         self.listeners: dict[BaseEvent, list[callable]] = dict()
         self.running = False
+        self.refresh_required = True
+        self.sprites: list[Sprite] = []
 
         self.screen = pygame.display.set_mode((480, 360,))
         pygame.display.set_caption("SC Game")
-        pygame.init()
 
     def mainloop(self):
+        pygame.init()
         self.running = True
+        self.screen.fill((255, 255, 255,))
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -31,14 +36,20 @@ class Game:
             if not self.running:
                 break
 
-            pygame.display.flip()
+            if self.refresh_required:
+                pygame.display.flip()
+                self.refresh_required = False
+
         pygame.quit()
 
-    def add_sprite(self, sprite: "Sprite"):
+    def refresh(self):
+        self.refresh_required = True
+        time.sleep(1 / 30)
         pass
 
-    def refresh(self):
-        pass
+    def add_sprite(self, sprite: "Sprite"):
+        sprite.set_game(self)
+        self.sprites.append(sprite)
 
     def add_listener(self, event: BaseEvent, listener: callable):
         pass

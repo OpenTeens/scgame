@@ -16,3 +16,16 @@ class MotionMixin(BaseSprite):
         self.x += delta_x
         self.y += delta_y
         self.game.refresh()
+
+    def point_towards(self, target):
+        if type(target) == int:
+            self.direction = target
+        else:
+            self.direction = arctan((target.x - self.x) / (target.y - self.y))
+            if target.y < self.y:
+                self.direction += 180
+            elif target.x < self.x and target.y > self.y:
+                self.direction += 360
+    
+    def on_edge(self) -> bool:
+        return not(-240 <= self.x <= 240 and -180 <= self.y <= 180)

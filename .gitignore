@@ -1,3 +1,5 @@
 /poetry.lock
 /temp.py
 /plant.jpg
+
+__pycache__

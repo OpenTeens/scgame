@@ -32,7 +32,7 @@ class MotionMixin(BaseSprite):
         移动到指定位置
         :param x: 目标x坐标
         :param y: 目标y坐标
-        :param seconds: 移动时间，默认为0（立即移动）
+        :param secs: 移动时间，默认为0（立即移动）
         :return: None
         """
         if secs > 0:

@@ -54,6 +54,8 @@ class MotionMixin(BaseSprite):
             self.direction = 180 - self.direction
         elif edge == 'left' or edge == 'right':
             self.direction = 360 - self.direction
+
+        self.direction %= 360
         self.game.refresh()
 
     # TODO self.rotation_mode

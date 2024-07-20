@@ -1,0 +1,2 @@
+class BaseEvent:
+    pass

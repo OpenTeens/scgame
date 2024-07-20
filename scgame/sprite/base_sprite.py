@@ -33,5 +33,11 @@ class BaseSprite:
         # TODO: Register all the listeners here
 
     def render(self, screen: pygame.Surface):
-        pass
+        # 新建一个sprite对象
+        sprite = pygame.sprite.Sprite()
+        sprite.image = self.costumes[self.current_costume]
+        sprite.rect = sprite.image.get_rect()
+        sprite.rect.center = (self.x, self.y)
+        screen.blit(sprite.image, sprite.rect)
+
 

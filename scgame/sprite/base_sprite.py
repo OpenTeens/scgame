@@ -4,7 +4,7 @@ from scgame.game import Game
 from scgame.utils import deg2rad
 
 
-class Sprite:
+class BaseSprite:
     def __init__(self):
         self.name = ""
         self.visible = True
@@ -31,14 +31,3 @@ class Sprite:
         self.global_lists = game.global_lists
         # TODO: Register all the listeners here
 
-    def move_forward(self, distance):
-        """
-        Move forward.
-        :param distance: distance to move
-        :return: None
-        """
-        delta_x = distance * math.sin(deg2rad(self.direction))
-        delta_y = distance * math.cos(deg2rad(self.direction))
-        self.x += delta_x
-        self.y += delta_y
-        self.game.refresh()

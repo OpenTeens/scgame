@@ -1,8 +1,8 @@
-import pygame
-from typing import Dict, List
-from typing import TYPE_CHECKING
+import typing
 
-from .events.base import BaseEvent
+import pygame
+from typing import TYPE_CHECKING, Hashable
+
 from .consts import *
 
 if TYPE_CHECKING:
@@ -11,13 +11,13 @@ if TYPE_CHECKING:
 
 class Game:
     def __init__(
-            self, 
-            caption="SC Game", 
-            size=(480, 360), 
-            flags=HWSURFACE|DOUBLEBUF):
+            self,
+            caption="SC Game",
+            size=(480, 360),
+            flags=HWSURFACE | DOUBLEBUF):
         self.global_vars = dict()
-        self.global_lists: Dict[str, List] = dict()
-        self.listeners: dict[BaseEvent, list[callable]] = dict()
+        self.global_lists: dict[str, list] = dict()
+        self.listeners: dict[Hashable, list[callable]] = dict()
         self.running = False
         self.refresh_required = True
         self.sprites: list[Sprite] = []
@@ -51,9 +51,14 @@ class Game:
         self.refresh_required = True
         self.clock.tick(30)
 
-    def add_sprite(self, sprite: Sprite):
+    def render_sprites(self):
+        for sprite in self.sprites:
+            sprite.render(self.screen)
+            self.refresh()
+
+    def add_sprite(self, sprite: "Sprite"):
         sprite.set_game(self)
         self.sprites.append(sprite)
 
-    def add_listener(self, event: BaseEvent, listener: callable):
-        self.listeners[event] = listener
+    # def add_listener(self, event: BaseEvent, listener: callable):
+    #     self.listeners[event] = listener

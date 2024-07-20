@@ -31,14 +31,6 @@ class MotionMixin(BaseSprite):
         self.direction = (self.direction + angle) % 360
         self.game.refresh()
 
-    def set_speed(self, speed):
-        """
-        设置精灵的速度
-        :param speed: 精灵的新速度
-        :return: None
-        """
-        self.speed = speed
-
     def stop(self):
         """
         停止精灵移动，将速度设置为0

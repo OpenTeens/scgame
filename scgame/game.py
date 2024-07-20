@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, caption="SC Game"):
         self.global_vars = dict()
         self.global_lists: Dict[str, List] = dict()
         self.listeners: dict[BaseEvent, list[callable]] = dict()
@@ -20,7 +20,8 @@ class Game:
         self.sprites: list[Sprite] = []
 
         self.screen = pygame.display.set_mode((480, 360,))
-        pygame.display.set_caption("SC Game")
+        self.clock = pygame.time.Clock()
+        pygame.display.set_caption(caption)
 
     def mainloop(self):
         pygame.init()
@@ -44,12 +45,11 @@ class Game:
 
     def refresh(self):
         self.refresh_required = True
-        time.sleep(1 / 30)
-        pass
+        self.clock.tick(30)
 
     def add_sprite(self, sprite: "Sprite"):
         sprite.set_game(self)
         self.sprites.append(sprite)
 
     def add_listener(self, event: BaseEvent, listener: callable):
-        pass
+        self.listeners[event] = listener

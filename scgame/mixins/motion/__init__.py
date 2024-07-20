@@ -27,7 +27,7 @@ class MotionMixin(BaseSprite):
         self.direction = (self.direction + degrees) % 360
         self.game.refresh()
 
-    def go_to(self, x, y, seconds=0):
+    def go_to(self, x, y, secs = 0):
         """
         移动到指定位置
         :param x: 目标x坐标
@@ -35,7 +35,7 @@ class MotionMixin(BaseSprite):
         :param seconds: 移动时间，默认为0（立即移动）
         :return: None
         """
-        if seconds > 0:
+        if secs > 0:
             # 如果指定了时间，可以实现平滑移动的效果，这里简化为立即移动
             steps = int(math.sqrt((x - self.x) ** 2 + (y - self.y) ** 2))
             self.move_forward(steps)

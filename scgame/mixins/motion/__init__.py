@@ -4,7 +4,7 @@ from scgame.sprite.base_sprite import BaseSprite
 from scgame.utils import deg2rad
 
 
-class _Motion(BaseSprite):
+class MotionMixin(BaseSprite):
     def move_forward(self, distance):
         """
         Move forward.

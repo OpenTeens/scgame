@@ -43,3 +43,17 @@ class MotionMixin(BaseSprite):
             self.x = x
             self.y = y
         self.game.refresh()
+
+    def bounce(self, edge):
+        """
+        碰撞边界时的反弹效果
+        :param edge: 碰撞的边界
+        :return: None
+        """
+        if edge == 'top' or edge == 'bottom':
+            self.direction = 180 - self.direction
+        elif edge == 'left' or edge == 'right':
+            self.direction = 360 - self.direction
+        self.game.refresh()
+
+    # TODO self.rotation_mode

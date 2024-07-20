@@ -32,6 +32,7 @@ class Game:
                     pygame.quit()
                     self.running = False
                     break
+                ...
 
             if not self.running:
                 break

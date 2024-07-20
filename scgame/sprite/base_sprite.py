@@ -4,7 +4,7 @@ from scgame.game import Game
 from scgame.utils import deg2rad
 
 
-class Sprite:
+class BaseSprite:
     def __init__(self):
         self.name = ""
         self.visible = True

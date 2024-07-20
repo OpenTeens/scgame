@@ -30,7 +30,6 @@ class BaseSprite:
         self.game = game
         self.global_vars = game.global_vars
         self.global_lists = game.global_lists
-        # TODO: Register all the listeners here
 
     def render(self, screen: pygame.Surface):
         # 新建一个sprite对象
@@ -39,5 +38,3 @@ class BaseSprite:
         sprite.rect = sprite.image.get_rect()
         sprite.rect.center = (self.x, self.y)
         screen.blit(sprite.image, sprite.rect)
-
-

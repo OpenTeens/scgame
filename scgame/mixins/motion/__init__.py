@@ -31,13 +31,6 @@ class MotionMixin(BaseSprite):
         self.direction = (self.direction + angle) % 360
         self.game.refresh()
 
-    def stop(self):
-        """
-        停止精灵移动，将速度设置为0
-        :return: None
-        """
-        self.speed = 0
-
     def move_backward(self, distance=None):
         """
         向后移动

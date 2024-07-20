@@ -2,45 +2,44 @@ import math
 from scgame.sprite.base_sprite import BaseSprite
 from scgame.utils import deg2rad
 
-
 class MotionMixin(BaseSprite):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.speed = 0  # 默认速度设置为0
 
-    def move_forward(self, distance=None):
+    def move_forward(self, steps):
         """
         向前移动
-        :param distance: 要移动的距离。如果为None，则使用当前速度。
+        :param steps: 要移动的步数
         :return: None
         """
-        if distance is None:
-            distance = self.speed
-        delta_x = distance * math.sin(deg2rad(self.direction))
-        delta_y = distance * math.cos(deg2rad(self.direction))
+        delta_x = steps * math.sin(deg2rad(self.direction))
+        delta_y = steps * math.cos(deg2rad(self.direction))
         self.x += delta_x
         self.y += delta_y
         self.game.refresh()
 
-    def rotate(self, angle):
+    def turn(self, degrees):
         """
         旋转精灵
-        :param angle: 要旋转的角度（度）。
+        :param degrees: 要旋转的角度（度）
         :return: None
         """
-        self.direction = (self.direction + angle) % 360
+        self.direction = (self.direction + degrees) % 360
         self.game.refresh()
 
-    def move_backward(self, distance=None):
+    def go_to(self, x, y, seconds=0):
         """
-        向后移动
-        :param distance: 要移动的距离。如果为None，则使用当前速度。
+        移动到指定位置
+        :param x: 目标x坐标
+        :param y: 目标y坐标
+        :param seconds: 移动时间，默认为0（立即移动）
         :return: None
         """
-        if distance is None:
-            distance = self.speed
-        delta_x = -distance * math.sin(deg2rad(self.direction))
-        delta_y = -distance * math.cos(deg2rad(self.direction))
-        self.x += delta_x
-        self.y += delta_y
+        if seconds > 0:
+            # 如果指定了时间，可以实现平滑移动的效果，这里简化为立即移动
+            steps = int(math.sqrt((x - self.x) ** 2 + (y - self.y) ** 2))
+            self.move_forward(steps)
+        else:
+            self.x = x
+            self.y = y
         self.game.refresh()

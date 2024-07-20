@@ -1,5 +1,5 @@
-from scgame.mixins.motion import _Motion
+from scgame.mixins.motion import MotionMixin
 
 
-class Sprite(_Motion):
+class Sprite(MotionMixin):
     pass

@@ -1,15 +1,7 @@
 import math
 
 from scgame.game import Game
-
-
-def deg2rad(deg):
-    """
-    [Tool]: Convert degree to radian.
-    :param deg: degree
-    :return: radian
-    """
-    return deg / 180 * math.pi
+from scgame.utils import deg2rad
 
 
 class Sprite:

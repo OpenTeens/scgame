@@ -1,3 +1,5 @@
+import time
+
 import pygame
 from typing import Dict, List
 from typing import TYPE_CHECKING
@@ -14,6 +16,7 @@ class Game:
         self.global_lists: Dict[str, List] = dict()
         self.listeners: dict[BaseEvent, list[callable]] = dict()
         self.running = False
+        self.refresh_required = False
 
         self.screen = pygame.display.set_mode((480, 360,))
         pygame.display.set_caption("SC Game")
@@ -31,13 +34,18 @@ class Game:
             if not self.running:
                 break
 
+        if self.refresh_required:
             pygame.display.flip()
+            self.refresh_required = False
+
         pygame.quit()
 
-    def add_sprite(self, sprite: "Sprite"):
+    def refresh(self):
+        self.refresh_required = True
+        time.sleep(1 / 30)
         pass
 
-    def refresh(self):
+    def add_sprite(self, sprite: "Sprite"):
         pass
 
     def add_listener(self, event: BaseEvent, listener: callable):

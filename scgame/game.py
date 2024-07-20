@@ -51,7 +51,7 @@ class Game:
         self.refresh_required = True
         self.clock.tick(30)
 
-    def add_sprite(self, sprite: "Sprite"):
+    def add_sprite(self, sprite: Sprite):
         sprite.set_game(self)
         self.sprites.append(sprite)
 

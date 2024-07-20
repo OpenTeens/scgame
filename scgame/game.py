@@ -16,14 +16,15 @@ class Game:
         self.global_lists: Dict[str, List] = dict()
         self.listeners: dict[BaseEvent, list[callable]] = dict()
         self.running = False
-        self.refresh_required = False
+        self.refresh_required = True
 
         self.screen = pygame.display.set_mode((480, 360,))
         pygame.display.set_caption("SC Game")
-        pygame.init()
 
     def mainloop(self):
+        pygame.init()
         self.running = True
+        self.screen.fill((255, 255, 255,))
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -34,9 +35,9 @@ class Game:
             if not self.running:
                 break
 
-        if self.refresh_required:
-            pygame.display.flip()
-            self.refresh_required = False
+            if self.refresh_required:
+                pygame.display.flip()
+                self.refresh_required = False
 
         pygame.quit()
 

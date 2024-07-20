@@ -17,6 +17,7 @@ class Game:
         self.listeners: dict[BaseEvent, list[callable]] = dict()
         self.running = False
         self.refresh_required = True
+        self.sprites: list[Sprite] = []
 
         self.screen = pygame.display.set_mode((480, 360,))
         pygame.display.set_caption("SC Game")
@@ -47,7 +48,8 @@ class Game:
         pass
 
     def add_sprite(self, sprite: "Sprite"):
-        pass
+        sprite.set_game(self)
+        self.sprites.append(sprite)
 
     def add_listener(self, event: BaseEvent, listener: callable):
         pass

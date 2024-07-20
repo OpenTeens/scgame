@@ -1,4 +1,5 @@
 import math
+import pygame
 
 from scgame.game import Game
 from scgame.utils import deg2rad
@@ -30,4 +31,7 @@ class BaseSprite:
         self.global_vars = game.global_vars
         self.global_lists = game.global_lists
         # TODO: Register all the listeners here
+
+    def render(self, screen: pygame.Surface):
+        pass
 

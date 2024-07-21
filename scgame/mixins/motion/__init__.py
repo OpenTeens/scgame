@@ -27,7 +27,7 @@ class MotionMixin(BaseSprite):
         if isinstance(target, int):
             self.direction = target
         else:
-            self.direction = math.degrees(math.atan2(target.y - self.y, target.x - self.x))
+            self.direction = math.degrees(math.atan2(target.x - self.x, target.y - self.y))
             if self.direction < 0:
                 self.direction += 360
     

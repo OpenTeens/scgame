@@ -37,15 +37,6 @@ class MotionMixin(BaseSprite):
         :return: 如果精灵触碰到边界，返回True，否则返回False
         """
         return not(-240 <= self.x <= 240 and -180 <= self.y <= 180)
-      
-    def turn(self, degrees):
-        """
-        旋转精灵
-        :param degrees: 要旋转的角度（度）
-        :return: None
-        """
-        self.direction = (self.direction + degrees) % 360
-        self.game.refresh()
 
     def go_to(self, x, y, secs = 0):
         """
@@ -79,3 +70,15 @@ class MotionMixin(BaseSprite):
         self.game.refresh()
 
     # TODO self.rotation_mode
+    def set_rotation_mode(self, mode, limits=None):
+        """
+        设置旋转模式
+        :param mode: 旋转模式 ('none', 'all', 'limited')
+        :param limits: 旋转限制 (仅在模式为 'limited' 时使用), 为一个元组表示角度范围 (min, max)
+        :return: None
+        """
+        self.rotation_mode = mode
+        if mode == 'limited' and limits:
+            self.rotation_limits = limits
+        elif mode != 'limited':
+            self.rotation_limits = None

@@ -14,7 +14,7 @@ class Game:
             self,
             caption="SC Game",
             size=(480, 360),
-            flags=HWSURFACE | DOUBLEBUF):
+            flags=None):
         self.global_vars = dict()
         self.global_lists: dict[str, list] = dict()
         self.listeners: dict[Hashable, list[callable]] = dict()

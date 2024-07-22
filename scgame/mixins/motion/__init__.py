@@ -18,21 +18,32 @@ class MotionMixin(BaseSprite):
         self.y += delta_y
         self.game.refresh()
 
-    def turn(self, degrees):
+    def point_towards(self, target):
         """
-        旋转精灵
-        :param degrees: 要旋转的角度（度）
+        精灵朝向特定目标
+        :param target: 可以是具有x和y坐标的对象，或者是一个特定的角度（整数）
         :return: None
         """
-        self.direction = (self.direction + degrees) % 360
-        self.game.refresh()
+        if isinstance(target, int):
+            self.direction = target
+        else:
+            self.direction = math.degrees(math.atan2(target.x - self.x, target.y - self.y))
+            if self.direction < 0:
+                self.direction += 360
+    
+    def on_edge(self) -> bool:
+        """
+        检查精灵是否触碰到边界
+        :return: 如果精灵触碰到边界，返回True，否则返回False
+        """
+        return not(-240 <= self.x <= 240 and -180 <= self.y <= 180)
 
     def go_to(self, x, y, secs = 0):
         """
         移动到指定位置
         :param x: 目标x坐标
         :param y: 目标y坐标
-        :param seconds: 移动时间，默认为0（立即移动）
+        :param secs: 移动时间，默认为0（立即移动）
         :return: None
         """
         if secs > 0:
@@ -59,3 +70,15 @@ class MotionMixin(BaseSprite):
         self.game.refresh()
 
     # TODO self.rotation_mode
+    def set_rotation_mode(self, mode, limits=None):
+        """
+        设置旋转模式
+        :param mode: 旋转模式 ('none', 'all', 'limited')
+        :param limits: 旋转限制 (仅在模式为 'limited' 时使用), 为一个元组表示角度范围 (min, max)
+        :return: None
+        """
+        self.rotation_mode = mode
+        if mode == 'limited' and limits:
+            self.rotation_limits = limits
+        elif mode != 'limited':
+            self.rotation_limits = None
